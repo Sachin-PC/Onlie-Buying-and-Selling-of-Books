@@ -1,0 +1,142 @@
+<?php
+session_start();
+include_once 'sample.php';
+include "nav.html";
+$res=mysqli_query($conn,"SELECT * FROM `seller` WHERE Branch='Computer Science'");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Computer Science</title>
+<link rel="stylesheet" href="homestyle.css" type="text/css" />
+
+<style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #323e41;
+}
+
+.dropdown {
+	margin-top=0px;
+	float:left;
+    position:fixed;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width:120px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: brown;
+    padding: 12px 16px;
+    text-decoration: None;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+</style>
+</head>
+<body>
+  <div style="padding:106px;margin:0 0 -115px -115px;">
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">SEMESTER</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="CS1.php">FIRST</a>
+    <a href="CS2.php">SECOND</a>
+    <a href="CS3.php">THIRD</a>
+	<a href="CS4.php">FOURTH</a>
+	<a href="CS5.php">FIFTH</a>
+	<a href="CS6.php">SIXTH</a>
+	<a href="CS7.php">SEVENTH</a>
+	<a href="CS8.php">EIGHTH</a>
+  </div>
+</div>
+</div>
+<div id="sellh">
+<h3>Books for Sale</h3>
+</div>
+<div class="sel">
+<?php
+$res=mysqli_query($conn,"SELECT * FROM `seller` WHERE Branch='Computer Science'");
+
+print"<hr>";
+while($arr=mysqli_fetch_array($res))
+{
+	print"<strong>BookName:</strong>{$arr['Bookname']}<br>";
+	print"<strong>Author:</strong>{$arr['Author']}<br>";
+	print"<strong>Branch:</strong>{$arr['Branch']}<br>";
+	print"<strong>Sem:</strong>{$arr['Sem']}<br>";
+	print"<strong>Edition:</strong>{$arr['Edition']}<br>";
+	print"<strong>Publishdate:</strong>{$arr['Publishdate']}<br>";
+	print"<strong>Mobno:</strong>{$arr['Mobno']}<br>";
+	print"<strong>Mrp:</strong>{$arr['Mrp']}<br>";
+	print"<strong>Sellingprice:</strong>{$arr['Sellingprice']}<br>";
+	print"<hr>";
+}
+?>
+</div>
+
+<div id="Reqbook">
+  <h3>Needed Book</h3>
+  </div>
+ <div class="req">
+ <?php
+$res=mysqli_query($conn,"SELECT * FROM `buyer`WHERE Branch='Computer Science'");
+print"<hr>";
+while($arr=mysqli_fetch_array($res))
+{
+	print"<strong>BookName:</strong>{$arr['Bookname']}<br>";
+	print"<strong>Author:</strong>{$arr['Author']}<br>";
+	print"<strong>Branch:</strong>{$arr['Branch']}<br>";
+	print"<strong>Sem:</strong>{$arr['Sem']}<br>";
+	print"<strong>Edition:</strong>{$arr['Edition']}<br>";
+	print"<strong>Publishdate:</strong>{$arr['Publishdate']}<br>";
+	print"<strong>Mobno:</strong>{$arr['Mobno']}<br>";
+	print"<strong>Mrp:</strong>{$arr['marketp']}<br>";
+	print"<strong>Expected price:</strong>{$arr['Expectedprice']}<br>";
+	print"<hr>";
+}
+?>
+</div>
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
